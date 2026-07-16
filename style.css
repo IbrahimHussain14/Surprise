@@ -81,15 +81,19 @@ height:100px;
 width:100%;
 }
 
-.yes,
+.yes{
+    position:absolute;
+    left:10px;
+    top:0;
+}
+
 #no{
-padding:14px 30px;
-font-size:18px;
-border-radius:999px;
-font-weight:700;
-border:none;
-cursor:pointer;
-transition:.25s;
+    position:absolute;
+    left:60%;
+    top:0;
+    background:#fff;
+    color:#ff4f9b;
+    border:2px solid #ff4f9b;
 }
 
 .yes{
