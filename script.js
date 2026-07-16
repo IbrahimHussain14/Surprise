@@ -1,6 +1,8 @@
-// ---------- Floating Hearts ----------
+// --------------------
+// Floating Hearts
+// --------------------
 
-for (let i = 0; i < 35; i++) {
+for (let i = 0; i < 40; i++) {
 
     const heart = document.createElement("div");
 
@@ -14,65 +16,64 @@ for (let i = 0; i < 35; i++) {
 
     heart.style.animationDelay = (-Math.random() * 10) + "s";
 
-    heart.style.fontSize = (18 + Math.random() * 16) + "px";
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
 
     document.body.appendChild(heart);
 
 }
 
-// ---------- No Button ----------
+
+// --------------------
+// No Button
+// --------------------
 
 const no = document.getElementById("no");
 
-let rightSide = true;
-
 const funnyTexts = [
     "No 🙈",
-    "Nice try 😜",
-    "Catch me 😂",
-    "Almost 😆",
-    "Think again 🤭"
+    "Hmm 🤔",
+    "Think again 😜",
+    "Really? 🥺",
+    "Catch me! 😂"
 ];
 
-let textIndex = 0;
+let current = 0;
 
-function runAway() {
+function move() {
 
-    if (rightSide) {
+    const container = document.querySelector(".buttons");
 
-        no.style.right = "";
-        no.style.left = "0";
+    const maxX = container.clientWidth - no.offsetWidth;
 
-    } else {
+    const x = Math.random() * maxX;
 
-        no.style.left = "";
-        no.style.right = "0";
+    no.style.position = "absolute";
+    no.style.left = x + "px";
+    no.style.top = "0px";
 
-    }
+    current = (current + 1) % funnyTexts.length;
 
-    rightSide = !rightSide;
+    no.innerHTML = funnyTexts[current];
 
-    textIndex = (textIndex + 1) % funnyTexts.length;
-    no.innerHTML = funnyTexts[textIndex];
 }
 
 // Desktop
-no.addEventListener("mouseenter", runAway);
+no.addEventListener("mouseenter", move);
 
 // Mobile
 no.addEventListener("touchstart", function (e) {
 
     e.preventDefault();
 
-    runAway();
+    move();
 
 }, { passive: false });
 
-// If somehow tapped
+// If someone actually taps it
 no.addEventListener("click", function (e) {
 
     e.preventDefault();
 
-    runAway();
+    move();
 
 });
