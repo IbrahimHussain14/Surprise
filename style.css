@@ -130,22 +130,20 @@ gap:18px;
 }
 
 .yes,
+
 #no{
+    position:absolute;
+    right:20px;
+    top:0;
 
-padding:14px 28px;
+    background:white;
+    color:#ff4f9b;
+    border:2px solid #ff4f9b;
 
-font-size:18px;
+    padding:14px 28px;
+    border-radius:999px;
 
-font-weight:700;
-
-border:none;
-
-border-radius:999px;
-
-cursor:pointer;
-
-transition:.25s;
-
+    transition:.25s;
 }
 
 .yes{
@@ -186,6 +184,8 @@ z-index:9999;
 transition:left .18s ease, top .18s ease;
 
 }
+
+
 
 .heart{
 
