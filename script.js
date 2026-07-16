@@ -1,81 +1,139 @@
-// --------------------
-// Floating Hearts
-// --------------------
+/* =========================================
+   FLOATING HEARTS
+========================================= */
 
-for (let i = 0; i < 40; i++) {
+const heartIcons = ["💖","💕","🌸","💗"];
 
-    const heart = document.createElement("div");
+for(let i=0;i<35;i++){
 
-    heart.className = "heart";
+    const heart=document.createElement("div");
 
-    heart.innerHTML = Math.random() > 0.4 ? "💖" : "🌸";
+    heart.className="heart";
 
-    heart.style.left = Math.random() * 100 + "vw";
+    heart.innerHTML=heartIcons[
+        Math.floor(Math.random()*heartIcons.length)
+    ];
 
-    heart.style.animationDuration = (7 + Math.random() * 7) + "s";
+    heart.style.left=Math.random()*100+"vw";
 
-    heart.style.animationDelay = (-Math.random() * 10) + "s";
+    heart.style.animationDuration=
+        (7+Math.random()*8)+"s";
 
-    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+    heart.style.animationDelay=
+        (-Math.random()*10)+"s";
+
+    heart.style.fontSize=
+        (18+Math.random()*16)+"px";
 
     document.body.appendChild(heart);
 
 }
 
 
-// --------------------
-// No Button
-// --------------------
+/* =========================================
+   NO BUTTON
+========================================= */
 
-const no = document.getElementById("no");
+const no=document.getElementById("no");
 
-const funnyTexts = [
+const container=document.querySelector(".buttons");
+
+const funnyTexts=[
+
     "No 🙈",
-    "Hmm 🤔",
-    "Think again 😜",
-    "Really? 🥺",
-    "Catch me! 😂"
+
+    "Nice try 😜",
+
+    "Think again 🤭",
+
+    "Catch me 😂",
+
+    "Almost 😆"
+
 ];
 
-let current = 0;
+let currentText=0;
 
-function move() {
+let currentSide="right";
 
-    const container = document.querySelector(".buttons");
 
-    const startX = container.clientWidth * 0.55;
+function moveButton(){
 
-    const maxX = container.clientWidth - no.offsetWidth;
+    const padding=10;
 
-    const x = startX + Math.random() * (maxX - startX);
+    const maxX=
+        container.clientWidth-
+        no.offsetWidth-
+        padding;
 
-    no.style.position = "absolute";
-    no.style.left = x + "px";
-    no.style.top = "0px";
+    let newX;
 
-    current = (current + 1) % funnyTexts.length;
+    if(currentSide==="right"){
 
-    no.innerHTML = funnyTexts[current];
+        newX=padding;
+
+        currentSide="left";
+
+    }else{
+
+        newX=maxX;
+
+        currentSide="right";
+
+    }
+
+    no.style.left=newX+"px";
+
+    no.style.right="auto";
+
+    currentText++;
+
+    if(currentText>=funnyTexts.length){
+
+        currentText=0;
+
+    }
+
+    no.innerHTML=funnyTexts[currentText];
 
 }
 
+/* =========================================
+   EVENT LISTENERS
+========================================= */
+
 // Desktop
-no.addEventListener("mouseenter", move);
+no.addEventListener("mouseenter", moveButton);
 
 // Mobile
-no.addEventListener("touchstart", function (e) {
+no.addEventListener("touchstart", function(e){
 
     e.preventDefault();
 
-    move();
+    moveButton();
 
-}, { passive: false });
+}, { passive:false });
 
-// If someone actually taps it
-no.addEventListener("click", function (e) {
+
+// If someone somehow taps it,
+// don't follow the button or open another page.
+no.addEventListener("click", function(e){
 
     e.preventDefault();
 
-    move();
+    moveButton();
 
 });
+
+
+// Keep the button on the right if the page is resized.
+window.addEventListener("resize", function(){
+
+    no.style.left = "";
+    no.style.right = "0";
+    no.style.top = "0";
+
+    currentSide = "right";
+
+});
+
