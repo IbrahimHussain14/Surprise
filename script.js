@@ -136,4 +136,3 @@ window.addEventListener("resize", function(){
     currentSide = "right";
 
 });
-
