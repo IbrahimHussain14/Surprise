@@ -69,14 +69,13 @@ function runAway() {
 }
 
 // Desktop
-
 no.addEventListener("mouseenter", runAway);
 
-// Android Chrome
-
-no.addEventListener("pointerenter", runAway);
-
-no.addEventListener("pointermove", runAway);
+// Mobile
+no.addEventListener("touchstart", function (e) {
+    e.preventDefault();
+    runAway();
+}, { passive: false });
 
 // Mobile
 
@@ -88,13 +87,3 @@ no.addEventListener("touchstart", function (e) {
 
 }, { passive: false });
 
-
-
-
-// When phone rotates
-
-window.addEventListener("resize", function () {
-
-    runAway();
-
-});
